@@ -8,7 +8,7 @@ os.environ["PYTHONWARNINGS"] = "ignore"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Set Groq API key
-os.environ["GROQ_API_KEY"] = "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"  # Replace with your key
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # Configure LLM and embedding model
 Settings.llm = Groq(model="llama3-70b-8192")  # Or "mixtral-8x7b-32768"

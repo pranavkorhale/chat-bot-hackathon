@@ -5,7 +5,7 @@ import os
 
 os.environ["PYTHONWARNINGS"] = "ignore"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-os.environ["GROQ_API_KEY"] = "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"
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 Settings.llm = Groq(model="llama3-70b-8192")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en")
