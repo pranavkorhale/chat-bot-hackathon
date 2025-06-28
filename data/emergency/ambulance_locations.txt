@@ -1,0 +1,143 @@
+========================================
+INDIANAPOLIS AMBULANCE LOCATIONS
+========================================
+
+PUBLIC AMBULANCE STATIONS (IEMS – Co-located with Indianapolis Fire Department stations):
+
+1. Station 2
+   Address: 4120 N Mitthoeffer Rd
+   City: Indianapolis
+   ZIP Code: 46235
+
+2. Station 3
+   Address: 1035 S Keystone Ave
+   City: Indianapolis
+   ZIP Code: 46203
+
+3. Station 4
+   Address: 8404 Ditch Rd
+   City: Indianapolis
+   ZIP Code: 46260
+
+4. Station 5
+   Address: 450 W 21st St
+   City: Indianapolis
+   ZIP Code: 46202
+
+5. Station 11
+   Address: 1715 E Washington St
+   City: Indianapolis
+   ZIP Code: 46201
+
+6. Station 12
+   Address: 2151 W Kessler Blvd N Dr
+   City: Indianapolis
+   ZIP Code: 46228
+
+7. Station 14
+   Address: 2960 N Kenwood Ave
+   City: Indianapolis
+   ZIP Code: 46208
+
+8. Station 16
+   Address: 8940 E Southport Rd
+   City: Indianapolis
+   ZIP Code: 46259
+
+9. Station 17
+   Address: 7139 E 75th St
+   City: Indianapolis
+   ZIP Code: 46256
+
+10. Station 18
+    Address: 42 N Warman Ave
+    City: Indianapolis
+    ZIP Code: 46222
+
+11. Station 21
+    Address: 2508 E 71st St
+    City: Indianapolis
+    ZIP Code: 46220
+
+12. Station 23
+    Address: 1108 E Thompson Rd
+    City: Indianapolis
+    ZIP Code: 46227
+
+13. Station 24
+    Address: 5520 E 38th St
+    City: Indianapolis
+    ZIP Code: 46218
+
+14. Station 26
+    Address: 7447 S Meridian St
+    City: Indianapolis
+    ZIP Code: 46217
+
+IEMS Headquarters  
+Address: 3930 Georgetown Rd  
+City: Indianapolis  
+ZIP Code: 46254
+
+----------------------------------------
+PRIVATE AMBULANCE SERVICE PROVIDERS
+----------------------------------------
+
+1. Emergency Medical Ambulance Service Inc  
+   Address: 1823 S Lynhurst Dr  
+   City: Indianapolis  
+   ZIP Code: 46241  
+   Phone: 317-243-7917
+
+2. Seals Ambulance Service, Inc.  
+   Address: 2400 Roosevelt Ave  
+   City: Indianapolis  
+   ZIP Code: 46218  
+   Phone: 317-541-1200
+
+3. Physicians Ambulance Service  
+   Address: 2667 Rand Rd  
+   City: Indianapolis  
+   ZIP Code: 46241
+
+4. Midwest Ambulance Service, Inc.  
+   Address: 8450 W Washington St  
+   City: Indianapolis  
+   ZIP Code: 46231
+
+5. Trans-Care Ambulance  
+   Address 1: 3820 Rockville Rd  
+   City: Indianapolis  
+   ZIP Code: 46241  
+   Address 2: 1740 S High School Rd  
+   City: Indianapolis  
+   ZIP Code: 46241
+
+6. Ark Medical Transport  
+   Address: 5610 Crawfordsville Rd  
+   City: Indianapolis  
+   ZIP Code: 46224
+
+7. Circle City Medical Transportation  
+   Address: 5265 E 82nd St  
+   City: Indianapolis  
+   ZIP Code: 46250
+
+8. Compassionate Medical Transportation  
+   Address: 636 E 34th St  
+   City: Indianapolis  
+   ZIP Code: 46205
+
+9. Action Ambulance Service  
+   Address: 5647 W Dividend Rd  
+   City: Indianapolis  
+   ZIP Code: 46241
+
+10. Rural/Metro Ambulance of Indianapolis  
+    Address: 109 Gasoline Alley  
+    City: Indianapolis  
+    ZIP Code: 46222
+
+========================================
+END OF FILE
+========================================

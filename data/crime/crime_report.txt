@@ -1,0 +1,39 @@
+==============================
+Indianapolis Crime Report Summary - June 10, 2025
+==============================
+
+Time Period: Most recent 12 months
+
+City Population: ~879,000 residents
+
+Total Reported Crimes: 40,938
+
+Violent Crimes:
+  - Count: 9,232
+  - Types: Murder, Rape, Robbery, Aggravated Assault
+  - Rate: Approximately 1 in 95 chance of being a victim
+
+Property Crimes:
+  - Count: 31,706 (burglary, larceny/theft, motor vehicle theft, arson)
+  - Rate: Approximately 1 in 28 chance of being a victim
+  - Rate per 1,000 residents: ~36
+
+Homicide Trends:
+  - 2024: 209 homicides
+  - Third consecutive year above 200 homicides
+  - Violent crime and homicide rates have shown a decrease from prior years
+
+Crime Guns Task Force (Q1 2025):
+  - Illegal firearms seized: 115
+  - Machine gun conversion devices seized: 167
+  - Fentanyl seized: 544g
+  - Marijuana seized: 32,164g
+  - Meth seized: 1,814g
+
+Police Department Resources:
+  - IMPD size as of 2024: ~1,489 officers (budget supported 1,843)
+  - Structure: six service districts (North, East, South, Northwest, West, Downtown)
+
+Crime Context:
+  - Indianapolis is safer than only ~3% of U.S. cities (Neighborhood Scout total crime index = 3 out of 100)
+  - Violent crime is ~125% higher than the national average

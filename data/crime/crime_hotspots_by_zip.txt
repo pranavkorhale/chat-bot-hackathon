@@ -1,0 +1,35 @@
+===============================================
+Indianapolis Crime Hotspots by ZIP Code (Full List)
+===============================================
+
+ZIP 46208
+  - Violent crime index: 78.0 (US avg 22.7)
+  - Property crime index: 79.9 (US avg 35.4)
+
+ZIP 46219
+  - Violent crime index: 51.0 (US avg 22.7)
+  - Property crime index: 61.2 (US avg 35.4)
+
+ZIP 46218
+  - Gun-related homicides (2023): 35
+
+ZIP 46226
+  - Gun-related homicides (2023): 20
+
+ZIP 46235
+  - Gun-related homicides (2023): 20
+
+ZIP 46291
+  - Gun-related homicides (2023): 18
+
+ZIP 46208 (again, included in homicide report above)
+  - Gun-related homicides (2023): 12
+
+ZIP 46221
+  - Violent crime rate index: 71.6 (US avg 22.7)
+  - Property crime rate index: 74.2 (US avg 35.4)
+
+Summary:
+- These seven ZIP codes consistently rank among the highest for violent and property crime.
+- The top five ZIP codes (46218, 46226, 46235, 46291, 46208) accounted for nearly half of Indianapolis homicides in 2023.
+- 46208, 46219, and 46221 show crime index ratings more than double the U.S. average.

@@ -1,0 +1,59 @@
+============================================
+Indianapolis Shelter Information (2024)
+============================================
+
+Emergency & Family Shelters:
+-----------------------------
+- Wheeler Mission
+  Services: Emergency shelter (men’s, women’s, families), meals, addiction recovery.
+  Address: 520 E Market St; Men’s Residential: 245 N Delaware St
+  Check-in by 6:30 PM; appointment required for recovery programs
+
+- Holy Family Shelter (Catholic Charities)
+  Services: Up to 22 families nightly, food, case management for housing/employment
+  Address: 907 N Holmes Ave
+  Shelter capacity: ~55–85 people nightly
+
+- Dayspring Center
+  Services: 24/7 emergency shelter for families and children, transitional housing (“Wellspring Cottage”)
+  Address: 1537 N Central Ave
+
+- Queen of Peace Shelter
+  Services: Short-term emergency shelter for adult mothers with up to two young children
+  Address: 2424 E 10th St
+
+- Family Promise of Greater Indianapolis (Interfaith Hospitality Network)
+  Services: Apartment-based family shelter, aftercare, diversion, transitional housing
+  Address: 1850 N Arsenal Ave
+
+- Good News Family Shelter
+  Services: Emergency shelter for families; meals and housing case assistance
+  Address: 2801 E Washington St
+
+- Salvation Army – Women & Children’s Center
+  Services: Emergency shelter up to 45 days; call daily 8–9 AM for openings
+  Address: 540 N Alabama St
+
+Daytime & Support Centers:
+--------------------------
+- Horizon House (day shelter)
+  Services: Day shelter for individuals; health care, mental health, laundry, job training
+  Address: 1033 E Washington St
+
+- CHIP/Indiana 2-1-1
+  Services: 24/7 connection to emergency shelter—dial 211 or 866‑211‑9966
+
+Street Outreach & Case Management:
+----------------------------------
+- Horizon House
+  Offers: Street outreach, peer support, case management, housing coordination
+
+- HealthNet Homeless Initiative Program
+  Locations: 901 Shelby St and select clinics (Holy Family Shelter, Julian Center, Wheeler Mission, Salvation Army)
+  Services: Appointments for medical care, insurance enrollment, street medicine
+
+Shelter Statistics & Initiatives:
+---------------------------------
+- As of Jan 2024, ~1,701 individuals were counted as homeless in Indianapolis (shelters, transitional housing, unsheltered) :contentReference[oaicite:1]{index=1}.
+- :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3}.
+- :contentReference[oaicite:4]{index=4} :contentReference[oaicite:5]{index=5}.
