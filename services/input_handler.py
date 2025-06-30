@@ -28,7 +28,7 @@ def handle_input():
             st.session_state.location_response = None
             st.session_state.last_input = user_input
 
-            if st.session_state.accessibility_mode:
+            if st.session_state.get("_accessibility_mode", False):
                 speak_async(rough_response)
 
             if is_hazard and st.session_state.auto_hazard_mode:

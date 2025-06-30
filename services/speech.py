@@ -18,6 +18,6 @@ def speak_async(text):
             finally:
                 st.session_state.is_speaking = False
     
-    if text and st.session_state.accessibility_mode:
+    if text and st.session_state.get("_accessibility_mode", False):
         threading.Thread(target=run, daemon=True).start()
 

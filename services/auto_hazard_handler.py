@@ -6,6 +6,10 @@ import streamlit as st
 
 # === Automatic Hazard Handling ===
 def handle_auto_hazard(user_input):
+    # Initialize accessibility_mode if it doesn't exist
+    if 'accessibility_mode' not in st.session_state:
+        st.session_state.accessibility_mode = False
+    
     with st.spinner("🚨 Automatically processing hazard report..."):
         lat = 39.7684
         lon = -86.1581
@@ -38,4 +42,3 @@ def handle_auto_hazard(user_input):
             st.session_state.response = error_msg
             if st.session_state.accessibility_mode:
                 speak_async(error_msg)
-
