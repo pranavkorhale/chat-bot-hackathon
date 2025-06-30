@@ -1,30 +1,29 @@
-from gtts import gTTS
-import tempfile
 import os
-import speech_recognition as sr
-import time
-import streamlit as st
-import threading
 import sys
+import tempfile
+import time
+import threading
+import streamlit as st
+import speech_recognition as sr
+from gtts import gTTS
 
-# === Try to import and safely initialize pygame mixer ===
-AUDIO_AVAILABLE = False
+# === Silence audio system error popup (e.g., 'dsp: No such audio device') ===
+os.environ["SDL_AUDIODRIVER"] = "dummy"
+sys.stderr = open(os.devnull, 'w')
 try:
-    # Temporarily suppress SDL audio device stderr output
-    original_stderr = sys.stderr
-    sys.stderr = open(os.devnull, 'w')
     from pygame import mixer
     mixer.init()
     AUDIO_AVAILABLE = True
 except Exception:
     AUDIO_AVAILABLE = False
 finally:
-    sys.stderr = original_stderr  # Restore stderr
+    sys.stderr = sys.__stderr__  # Restore stderr output
+
 
 def speak_text(text):
     """Convert text to speech and play it using pygame mixer (if available)."""
     if not AUDIO_AVAILABLE:
-        return  # Silent fallback
+        return  # Audio not available; skip speech
 
     try:
         if not text or not isinstance(text, str):
@@ -45,13 +44,14 @@ def speak_text(text):
                 time.sleep(0.1)
             try:
                 os.remove(temp_file)
-            except:
+            except Exception:
                 pass
 
         threading.Thread(target=cleanup, daemon=True).start()
 
     except Exception:
-        pass  # Avoid noisy logs in Streamlit
+        pass  # Fail silently
+
 
 def record_and_transcribe():
     """Record audio from mic and transcribe using Google Speech Recognition."""
