@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(page_title="SafeIndy - Public Safety Chatbot", layout="wide")
 import os
 import requests
 from datetime import datetime, timedelta
@@ -31,7 +32,7 @@ if not mixer.get_init():
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 os.environ["PYTHONWARNINGS"] = "ignore"
 
-st.set_page_config(page_title="SafeIndy - Public Safety Chatbot", layout="wide")
+
 
 # === Session State Initialization ===
 default_states = {
