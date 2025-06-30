@@ -1,12 +1,31 @@
 import streamlit as st
 import os
+import requests
+from datetime import datetime, timedelta
+import folium
+from streamlit_folium import st_folium
 from backend.query_rag import get_response, get_llm
 from database.process_hazard import save_hazard_if_needed, get_recent_hazards
-from datetime import datetime, timedelta
-from alert_map import show_alert_map_ui
-import requests
-from streamlit_folium import st_folium
-import folium
+from services.accessibility_utils import speak_text, record_and_transcribe
+import threading
+import pygame
+from pygame import mixer
+import time
+from services.hazard_detection import is_actual_hazard, classify_hazard_type
+from services.speech import speak_async
+from services.geolocation import reverse_geocode
+from services.llm_response import get_location_aware_response
+from services.auto_hazard_handler import handle_auto_hazard
+from services.input_handler import handle_input
+from component.alert_map import show_alert_map_ui
+
+
+# === Initialize Audio System ===
+if not mixer.get_init():
+    try:
+        mixer.init()
+    except Exception as e:
+        st.warning(f"Audio system initialization failed - voice features may not work: {str(e)}")
 
 # === Disable warnings ===
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
@@ -15,7 +34,7 @@ os.environ["PYTHONWARNINGS"] = "ignore"
 st.set_page_config(page_title="SafeIndy - Public Safety Chatbot", layout="wide")
 
 # === Session State Initialization ===
-for key, val in {
+default_states = {
     "input_text": "",
     "last_input": "",
     "hazard_saved": False,
@@ -25,98 +44,39 @@ for key, val in {
     "lon": None,
     "reverse_info": None,
     "location_response": None,
-    "show_map_mode": False
-}.items():
+    "show_map_mode": False,
+    "accessibility_mode": False,
+    "is_speaking": False,
+    "audio_mode_initialized": False,
+    "auto_hazard_mode": False
+}
+for key, val in default_states.items():
     if key not in st.session_state:
         st.session_state[key] = val
+
 
 # === Show Alert Map if triggered ===
 if st.session_state.get("show_map_mode", False):
     show_alert_map_ui()
     st.stop()
 
-# === Reverse geocoding ===
-def reverse_geocode(lat, lon):
-    url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom=18&addressdetails=1"
-    headers = {"User-Agent": "SafeIndyBot/1.0"}
-    try:
-        res = requests.get(url, headers=headers, timeout=5)
-        if res.status_code == 200:
-            data = res.json()
-            return {
-                "display_name": data.get("display_name"),
-                "postcode": data.get("address", {}).get("postcode"),
-                "city": data.get("address", {}).get("city") or data.get("address", {}).get("town"),
-                "suburb": data.get("address", {}).get("suburb") or data.get("address", {}).get("neighbourhood")
-            }
-    except Exception as e:
-        print("Reverse geocoding failed:", e)
-    return {}
-
-# === Hazard Intent Detection ===
-def is_actual_hazard(user_input: str, chatbot_response: str) -> bool:
-    llm = get_llm()
-    prompt = f"""
-You are a safety assistant. Based on the following messages, decide if the user is reporting a real-time safety hazard (e.g., fire, accident, flood, crime).
-
-User Message: "{user_input}"
-Chatbot Response: "{chatbot_response}"
-
-Answer only "Yes" or "No".
-"""
-    result = llm.complete(prompt=prompt)
-    return result.text.strip().lower().startswith("yes")
-
-# === Location-Aware LLM Response ===
-def get_location_aware_response(message, lat, lon, place, zip_code):
-    llm = get_llm()
-    prompt = f"""
-You are SafeIndy, a helpful assistant for Indianapolis residents.
-
-The user reported: "{message}"
-Location: {place}
-ZIP: {zip_code}
-Coordinates: {lat}, {lon}
-
-Based on this information, give a helpful and specific response including safety advice or nearby help if appropriate.
-"""
-    result = llm.complete(prompt=prompt)
-    return result.text.strip()
-
-# === Input Handler ===
-def handle_input():
-    user_input = st.session_state.input_text.strip()
-    if user_input and user_input != st.session_state.last_input:
-        if "show alert map" in user_input.lower():
-            st.session_state.show_map_mode = True
-            st.session_state.input_text = ""
-            st.rerun()
-
-        with st.spinner("🔍 Analyzing..."):
-            rough_response = get_response(user_input)
-            st.session_state.response = rough_response
-            is_hazard = is_actual_hazard(user_input, rough_response)
-
-            st.session_state.is_hazard = is_hazard
-            st.session_state.awaiting_location = is_hazard
-            st.session_state.hazard_saved = False
-            st.session_state.reverse_info = None
-            st.session_state.lat = None
-            st.session_state.lon = None
-            st.session_state.location_response = None
-            st.session_state.last_input = user_input
-
-    st.session_state.input_text = ""
 
 # === Custom Styling ===
 st.markdown("""
     <style>
     .chat-box {
-        border: 2px solid #4CAF50;
+        border: 2px solid #2196F3;
         padding: 10px;
         border-radius: 5px;
-        background-color: #f9f9f9;
+        background-color: #e3f2fd;
         margin-top: 10px;
+    }
+    .auto-hazard {
+        border: 2px solid #f44336;
+        background-color: #ffebee;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -128,20 +88,55 @@ left_col, right_col = st.columns([2, 1])
 with left_col:
     st.title("🚨 SafeIndy - Public Safety Chatbot")
 
+    col_acc, col_auto = st.columns(2)
+    with col_acc:
+        audio_mode = st.checkbox("♿ Enable Accessibility (Audio Mode)", key="accessibility_mode",
+                               help="Enable voice responses and voice commands")
+        if audio_mode and not st.session_state.audio_mode_initialized:
+            speak_async("Audio mode enabled. All responses will be read aloud.")
+            st.session_state.audio_mode_initialized = True
+            
+        if audio_mode:
+            if st.button("🔊 Test Audio"):
+                speak_async("This is a test of the SafeIndy audio system")
+                
+    with col_auto:
+        st.checkbox("🤖 Enable Auto-Hazard Detection", key="auto_hazard_mode",
+                   help="Automatically detect and submit hazards without manual confirmation")
+
+    if st.session_state.accessibility_mode:
+        if st.button("🎙️ Speak Your Input"):
+            with st.spinner("Listening... (5 second timeout)"):
+                spoken_text = record_and_transcribe()
+                if spoken_text:
+                    st.session_state.input_text = spoken_text
+                    st.rerun()
+
     st.text_input(
         "Report or Ask Anything About Public Safety in Indianapolis",
         key="input_text",
         on_change=handle_input
     )
 
-    if st.session_state.get("response") and not st.session_state.is_hazard:
-        st.markdown(
-            f'<div class="chat-box"><b>🤖 Response:</b><br>{st.session_state.response}</div>',
-            unsafe_allow_html=True
-        )
+    if st.session_state.get("response"):
+        if st.session_state.hazard_saved and st.session_state.auto_hazard_mode:
+            st.markdown(
+                f'<div class="auto-hazard"><b>🤖 Auto-Response:</b><br>{st.session_state.response}</div>',
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                f'<div class="chat-box"><b>🤖 Response:</b><br>{st.session_state.response}</div>',
+                unsafe_allow_html=True
+            )
+        
+        if st.session_state.accessibility_mode and not st.session_state.is_speaking:
+            speak_async(st.session_state.response)
 
-    if st.session_state.awaiting_location and st.session_state.is_hazard:
+    if st.session_state.awaiting_location and st.session_state.is_hazard and not st.session_state.auto_hazard_mode:
         st.info("📍 Hazard detected. Please select the location on map.")
+        if st.session_state.accessibility_mode:
+            speak_async("Hazard detected. Please select the location on map.")
 
         m = folium.Map(location=[39.7684, -86.1581], zoom_start=12)
         m.add_child(folium.LatLngPopup())
@@ -167,80 +162,86 @@ with left_col:
             )
             st.session_state.awaiting_location = False
 
-    if st.session_state.get("location_response"):
+    if st.session_state.get("location_response") and not st.session_state.auto_hazard_mode:
         st.markdown(
             f'<div class="chat-box"><b>🤖 Response:</b><br>{st.session_state.location_response}</div>',
             unsafe_allow_html=True
         )
+        if st.session_state.accessibility_mode:
+            speak_async(st.session_state.location_response)
 
-        lat = st.session_state.lat
-        lon = st.session_state.lon
-        info = st.session_state.reverse_info or {}
-        place = info.get("display_name", "Unknown location")
-        zip_code = info.get("postcode", "Unknown ZIP")
-        city = info.get("city", "Unknown")
-        suburb = info.get("suburb", "Unknown")
-        country = "United States"
+        if not st.session_state.auto_hazard_mode:
+            lat = st.session_state.lat
+            lon = st.session_state.lon
+            info = st.session_state.reverse_info or {}
+            place = info.get("display_name", "Unknown location")
+            zip_code = info.get("postcode", "Unknown ZIP")
+            city = info.get("city", "Unknown")
+            suburb = info.get("suburb", "Unknown")
+            country = "United States"
 
-        with st.form("hazard_form"):
-            st.subheader("📋 Provide Details About the Hazard")
+            with st.form("hazard_form"):
+                st.subheader("📋 Provide Details About the Hazard")
+                if st.session_state.accessibility_mode:
+                    speak_async("Please provide details about the hazard")
 
-            hazard_type = st.selectbox("Type of Hazard", ["Fire", "Crime", "Flood", "Accident", "Medical Emergency", "Other"])
-            title = st.text_input("Short Title (e.g., Fire near school gate)")
-            details = st.text_area("Detailed Description")
-            severity = st.radio("Severity Level", ["Low", "Medium", "High", "Critical"])
-            contact = st.text_input("Your Contact Info (optional)")
+                hazard_type = st.selectbox("Type of Hazard", ["Fire", "Crime", "Flood", "Accident", "Medical Emergency", "Other"])
+                title = st.text_input("Short Title (e.g., Fire near school gate)")
+                details = st.text_area("Detailed Description")
+                severity = st.radio("Severity Level", ["Low", "Medium", "High", "Critical"])
+                contact = st.text_input("Your Contact Info (optional)")
 
-            submitted = st.form_submit_button("✅ Submit Hazard Report")
-            if submitted:
-                full_description = f"**{hazard_type} | {severity}**\n\n{title}\n\n{details}\n\nLocation: {place}\nZIP: {zip_code}\nContact: {contact or 'N/A'}"
+                submitted = st.form_submit_button("✅ Submit Hazard Report")
+                if submitted:
+                    full_description = f"**{hazard_type} | {severity}**\n\n{title}\n\n{details}\n\nLocation: {place}\nZIP: {zip_code}\nContact: {contact or 'N/A'}"
 
-                hazard_data = {
-                    "description": full_description,
-                    "lat": lat,
-                    "lon": lon,
-                    "hazard_type": hazard_type,
-                    "severity": severity,
-                    "contact": contact,
-                    "city": city,
-                    "suburb": suburb,
-                    "postcode": zip_code,
-                    "country": country,
-                    "full_location": place
-                }
+                    hazard_data = {
+                        "description": full_description,
+                        "lat": lat,
+                        "lon": lon,
+                        "hazard_type": hazard_type,
+                        "severity": severity,
+                        "contact": contact,
+                        "city": city,
+                        "suburb": suburb,
+                        "postcode": zip_code,
+                        "country": country,
+                        "full_location": place
+                    }
 
-                if save_hazard_if_needed(hazard_data):
-                    st.session_state.hazard_saved = True
-                    st.success("🚨 Hazard reported successfully.")
-                else:
-                    st.error("❌ Failed to save hazard.")
+                    if save_hazard_if_needed(hazard_data):
+                        st.session_state.hazard_saved = True
+                        success_msg = "🚨 Hazard reported successfully."
+                        st.success(success_msg)
+                        if st.session_state.accessibility_mode:
+                            speak_async(success_msg)
+                    else:
+                        error_msg = "❌ Failed to save hazard."
+                        st.error(error_msg)
+                        if st.session_state.accessibility_mode:
+                            speak_async(error_msg)
 
-    if st.session_state.hazard_saved:
+    if st.session_state.hazard_saved and not st.session_state.auto_hazard_mode:
         st.success("✅ Hazard logged successfully!")
+        if st.session_state.accessibility_mode:
+            speak_async("Hazard logged successfully")
 
 # === RIGHT COLUMN ===
 with right_col:
-    st.subheader("🕒 View Reported Hazards / Alerts ")
+    st.subheader("🕒 View Reported Hazards / Alerts")
+    if st.session_state.accessibility_mode:
+        speak_async("View reported hazards and alerts")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        time_range = st.selectbox(
-            "🕒 Time Range",
-            options=["Past 1 hour", "Past 2 hours", "Past 6 hours", "Past 24 hours"]
-        )
+        time_range = st.selectbox("🕒 Time Range", ["Past 1 hour", "Past 2 hours", "Past 6 hours", "Past 24 hours"])
 
     with col2:
-        hazard_type_filter = st.selectbox(
-            "⚠️ Hazard Type",
-            options=["All", "Fire", "Crime", "Flood", "Accident", "Medical Emergency", "Other"]
-        )
+        hazard_type_filter = st.selectbox("⚠️ Hazard Type", ["All", "Fire", "Crime", "Flood", "Accident", "Medical Emergency", "Other"])
 
     with col3:
-        severity_filter = st.selectbox(
-            "🔥 Severity",
-            options=["All", "Low", "Medium", "High", "Critical"]
-        )
+        severity_filter = st.selectbox("🔥 Severity", ["All", "Low", "Medium", "High", "Critical"])
 
     time_mapping = {
         "Past 1 hour": timedelta(hours=1),
@@ -250,7 +251,6 @@ with right_col:
     }
 
     hazards = get_recent_hazards(since=datetime.utcnow() - time_mapping[time_range])
-
     if hazard_type_filter != "All":
         hazards = [h for h in hazards if h.get("hazard_type") == hazard_type_filter]
     if severity_filter != "All":
@@ -281,7 +281,6 @@ with right_col:
             country = h.get("country", "")
             contact = h.get("contact", "N/A")
             full_location = h.get("full_location") or h.get("description", "")
-
             border_color = severity_colors.get(severity, "#888")
             bg_color = bg_colors.get(severity, "#f9f9f9")
 
@@ -311,21 +310,24 @@ with right_col:
                         Give a helpful and actionable response as SafeIndyBot.
                         """
                         response = llm.complete(prompt=help_prompt)
+                        help_response = response.text.strip()
                         st.markdown(
-                            f"""
-                            <div class=\"chat-box\">
-                                <b>🤖 SafeIndyBot Help Response:</b><br>{response.text.strip()}
-                            </div>
-                            """,
+                            f'<div class="chat-box"><b>🤖 SafeIndyBot Help Response:</b><br>{help_response}</div>',
                             unsafe_allow_html=True
                         )
+                        if st.session_state.accessibility_mode:
+                            speak_async(help_response)
                     except Exception as e:
-                        st.error("❌ Failed to get help from chatbot.")
+                        error_msg = "❌ Failed to get help from chatbot."
+                        st.error(error_msg)
                         st.write(str(e))
+                        if st.session_state.accessibility_mode:
+                            speak_async(error_msg)
     else:
         st.info("✅ No hazards reported in this time range.")
+        if st.session_state.accessibility_mode:
+            speak_async("No hazards reported in this time range")
 
-    # === Manual Alert Map Button Section ===
     st.markdown("---")
     st.subheader("🗺️ Explore Alerts on Map")
     if st.button("Show Alert Map"):

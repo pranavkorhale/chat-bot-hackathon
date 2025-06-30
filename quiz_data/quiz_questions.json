@@ -1,0 +1,484 @@
+[
+    {
+      "question": "What should you do if you find a suspicious bag in a public place?",
+      "options": ["Leave it alone and alert authorities", "Open it to check", "Ignore it"],
+      "answer": 0
+    },
+    {
+      "question": "Which number should you dial in case of an emergency?",
+      "options": ["911", "411", "311"],
+      "answer": 0
+    },
+    {
+      "question": "What should you do if you smell gas in your home?",
+      "options": ["Turn on all the lights", "Use a candle to check for leaks", "Leave immediately and call the gas company"],
+      "answer": 2
+    },
+    {
+      "question": "How should you respond if you hear a fire alarm in a building?",
+      "options": ["Finish what you're doing", "Evacuate the building immediately", "Wait to see if it's a real fire"],
+      "answer": 1
+    },
+    {
+      "question": "What is the safest action if you’re caught in a rip current while swimming?",
+      "options": ["Swim directly back to shore", "Swim parallel to the shore", "Panic and try to float"],
+      "answer": 1
+    },
+    {
+      "question": "If you see a downed power line after a storm, what should you do?",
+      "options": ["Touch it to check if it's live", "Drive over it quickly", "Stay far away and call the utility company"],
+      "answer": 2
+    },
+    {
+      "question": "What should you do if a severe thunderstorm warning is issued while you're outside?",
+      "options": ["Seek shelter indoors", "Hide under a tree", "Keep walking to your destination"],
+      "answer": 0
+    },
+    {
+      "question": "When is it safe to return to a building after an earthquake?",
+      "options": ["Immediately after shaking stops", "Only after it has been inspected for damage", "After one hour has passed"],
+      "answer": 1
+    },
+    {
+      "question": "If you’re driving and come across a flooded road, what should you do?",
+      "options": ["Drive through quickly", "Turn around and find another route", "Stop in the middle and wait"],
+      "answer": 1
+    },
+    {
+      "question": "What is a common sign of carbon monoxide poisoning?",
+      "options": ["Coughing and sneezing", "Sudden rash", "Headache and dizziness"],
+      "answer": 2
+    },
+    {
+      "question": "If you see someone having a heatstroke, what should you do?",
+      "options": ["Give them ice-cold water quickly", "Move them to a cool area and call 911", "Cover them with a blanket"],
+      "answer": 1
+    },
+    {
+      "question": "What should you do during a tornado warning if you're in a building?",
+      "options": ["Go outside and watch", "Move to an interior room without windows", "Open all windows to equalize pressure"],
+      "answer": 1
+    },
+    {
+      "question": "What is the first thing to do if you discover a fire in your home?",
+      "options": ["Try to put it out yourself", "Evacuate and call 911", "Close all the windows"],
+      "answer": 1
+    },
+    {
+      "question": "In winter weather, what should you keep in your car?",
+      "options": ["Beach umbrella", "Blanket and emergency kit", "Air freshener"],
+      "answer": 1
+    },
+    {
+      "question": "How can you prevent electrical fires?",
+      "options": ["Overload outlets", "Use damaged cords", "Avoid overloading and use surge protectors"],
+      "answer": 2
+    },
+    {
+      "question": "What’s the safest way to use a space heater?",
+      "options": ["Leave it near curtains", "Place it on a flat surface and keep 3 feet clear", "Place it on a bed for warmth"],
+      "answer": 1
+    },
+    {
+      "question": "During an earthquake, what should you do?",
+      "options": ["Run outside immediately", "Drop, cover, and hold on", "Jump in a pool"],
+      "answer": 1
+    },
+    {
+      "question": "If your smoke detector goes off while you are sleeping, what should you do?",
+      "options": ["Ignore it", "Go back to sleep", "Wake up immediately and evacuate"],
+      "answer": 2
+    },
+    {
+      "question": "What does the color red mean on a hazard sign?",
+      "options": ["Go", "Danger or stop", "Safe zone"],
+      "answer": 1
+    },
+    {
+      "question": "What is a safe action during a lightning storm?",
+      "options": ["Use your phone outdoors", "Stay under a tree", "Go indoors and avoid electronics"],
+      "answer": 2
+    },
+    {
+      "question": "How can you reduce wildfire risk near your home?",
+      "options": ["Keep dry leaves near the house", "Clear vegetation and create defensible space", "Use fireworks"],
+      "answer": 1
+    },
+    {
+      "question": "What’s the best way to prepare for a flood?",
+      "options": ["Wait until it starts", "Move valuables to high ground and have a plan", "Stay in the basement"],
+      "answer": 1
+    },
+    {
+      "question": "Why is it dangerous to leave candles unattended?",
+      "options": ["They melt too fast", "They attract insects", "They can start a fire"],
+      "answer": 2
+    },
+    {
+      "question": "What should you do if you’re trapped in a burning building?",
+      "options": ["Break a window and jump", "Stay low and find the nearest exit", "Hide in a closet"],
+      "answer": 1
+    },
+    {
+      "question": "What does a flashing red traffic light mean?",
+      "options": ["Go faster", "Stop and proceed when safe", "Ignore it"],
+      "answer": 1
+    },
+    {
+      "question": "What should you do if your clothes catch on fire?",
+      "options": ["Run fast", "Stop, drop, and roll", "Take them off"],
+      "answer": 1
+    },
+    {
+      "question": "What is the best way to protect yourself during poor air quality alerts?",
+      "options": ["Exercise outdoors", "Stay inside and keep windows closed", "Light candles for fresh air"],
+      "answer": 1
+    },
+    {
+      "question": "How often should smoke alarms be tested?",
+      "options": ["Never", "Every month", "Every 5 years"],
+      "answer": 1
+    },
+    {
+      "question": "What does black ice refer to?",
+      "options": ["Pavement with oil", "Invisible layer of ice", "Charred roads"],
+      "answer": 1
+    },
+    {
+      "question": "What’s a basic component of an emergency kit?",
+      "options": ["TV", "First aid supplies", "Candies"],
+      "answer": 1
+    },
+    {
+      "question": "What is one of the first signs of hypothermia?",
+      "options": ["Sweating", "Shivering", "Itching"],
+      "answer": 1
+    },
+    {
+      "question": "What hazard is associated with wet floors?",
+      "options": ["Electrocution", "Slips and falls", "Smoke inhalation"],
+      "answer": 1
+    },
+    {
+      "question": "What should you never pour on a grease fire?",
+      "options": ["Salt", "Water", "Baking soda"],
+      "answer": 1
+    },
+    {
+      "question": "What is a safe way to exit a smoky room?",
+      "options": ["Run fast", "Crawl low under the smoke", "Wave a towel above your head"],
+      "answer": 1
+    },
+    {
+      "question": "Which items should be stored in a storm shelter?",
+      "options": ["Board games", "Emergency food, water, flashlight", "TV"],
+      "answer": 1
+    },
+    {
+      "question": "How should you report a gas leak?",
+      "options": ["Text a friend", "Call 911 or the gas company from outside", "Light a match to check"],
+      "answer": 1
+    },
+    {
+      "question": "Why should you avoid floodwaters?",
+      "options": ["They’re dirty", "They may hide dangers like open manholes", "They are cold"],
+      "answer": 1
+    },
+    {
+      "question": "Why is it important to secure heavy furniture to walls in an earthquake zone?",
+      "options": ["It looks better", "It prevents tipping and injury", "It keeps kids away"],
+      "answer": 1
+    },
+    {
+      "question": "What does a blue hazard symbol usually indicate?",
+      "options": ["Flammability", "Health hazard", "Explosion risk"],
+      "answer": 1
+    },
+    {
+      "question": "What is a common safety risk in older buildings?",
+      "options": ["Modern wiring", "Lead paint and asbestos", "Solar panels"],
+      "answer": 1
+    },
+    {
+      "question": "Why is texting while walking hazardous?",
+      "options": ["You might miss a text", "You could walk into traffic or obstacles", "You waste battery"],
+      "answer": 1
+    },
+    {
+      "question": "How can you reduce the risk of kitchen fires?",
+      "options": ["Leave food unattended", "Stay in the kitchen while cooking", "Cook while sleepy"],
+      "answer": 1
+    },
+    {
+      "question": "Which of these should be included in a fire escape plan?",
+      "options": ["Multiple exits and a meeting point", "A window with a view", "A picnic area"],
+      "answer": 0
+    },
+    {
+      "question": "What is the main danger of using generators indoors?",
+      "options": ["They’re noisy", "Carbon monoxide poisoning", "Too much electricity"],
+      "answer": 1
+    },
+    {
+      "question": "Why should children avoid playing near construction zones?",
+      "options": ["Boring", "Unsafe with machinery and debris", "No internet"],
+      "answer": 1
+    },
+    {
+      "question": "How can you prevent slips in the bathroom?",
+      "options": ["Use rugs", "Install non-slip mats", "Keep it dark"],
+      "answer": 1
+    },
+    {
+      "question": "What does an amber alert signify?",
+      "options": ["Fire drill", "Missing child alert", "Weather warning"],
+      "answer": 1
+    },
+    {
+      "question": "If a hazardous chemical spills, what should you do?",
+      "options": ["Try to clean it yourself", "Evacuate and contact professionals", "Ignore it"],
+      "answer": 1
+    },
+        {
+          "question": "Why should you not use elevators during a fire?",
+          "options": ["They are slow", "They might stop working or open on a fire floor", "They are crowded"],
+          "answer": 1
+        },
+        {
+          "question": "What does shelter-in-place mean during a chemical emergency?",
+          "options": ["Evacuate the building", "Stay indoors, seal windows and doors", "Go to the basement"],
+          "answer": 1
+        },
+        {
+          "question": "Why is it important to keep emergency exits clear at all times?",
+          "options": ["For decoration", "So they can be used during an emergency", "For extra storage"],
+          "answer": 1
+        },
+        {
+          "question": "What should you do if you are driving during an earthquake?",
+          "options": ["Stop in a safe area and stay in the car", "Speed up to get away", "Honk for help"],
+          "answer": 0
+        },
+        {
+          "question": "How do you reduce the spread of airborne illnesses?",
+          "options": ["Open your mouth when coughing", "Cover your mouth and nose, wear a mask", "Avoid washing hands"],
+          "answer": 1
+        },
+        {
+          "question": "When should you evacuate for a hurricane?",
+          "options": ["After it passes", "Only if authorities advise", "As soon as clouds appear"],
+          "answer": 1
+        },
+        {
+          "question": "Why is it dangerous to walk on railroad tracks?",
+          "options": ["Too bumpy", "You might trip", "Trains can come silently and quickly"],
+          "answer": 2
+        },
+        {
+          "question": "How often should you practice your home fire escape plan?",
+          "options": ["Once a year", "Never", "Twice a year"],
+          "answer": 2
+        },
+        {
+          "question": "What is the safest way to store hazardous household chemicals?",
+          "options": ["On the counter", "In locked cabinets away from children", "Next to food"],
+          "answer": 1
+        },
+        {
+          "question": "What should you do if lightning strikes nearby?",
+          "options": ["Lay down flat in an open field", "Crouch low, feet together, minimize contact with ground", "Run fast"],
+          "answer": 1
+        },
+        {
+          "question": "Which is a common indoor hazard for young children?",
+          "options": ["Toys", "Exposed electrical outlets", "Windows"],
+          "answer": 1
+        },
+        {
+          "question": "Why should you avoid touching your face during a pandemic?",
+          "options": ["It causes acne", "It increases the risk of infection", "It’s impolite"],
+          "answer": 1
+        },
+        {
+          "question": "How can you reduce the risk of drowning in pools?",
+          "options": ["Supervise children, install barriers", "Leave toys floating", "Swim alone"],
+          "answer": 0
+        },
+        {
+          "question": "What should you do before using a ladder?",
+          "options": ["Check stability and surroundings", "Lean it on a moving surface", "Jump on it to test it"],
+          "answer": 0
+        },
+        {
+          "question": "What is the risk of driving under the influence?",
+          "options": ["Improved focus", "Increased accident risk", "Free drinks"],
+          "answer": 1
+        },
+        {
+          "question": "Why are blocked fire hydrants dangerous?",
+          "options": ["They’re hard to find", "They delay firefighting efforts", "They get hot"],
+          "answer": 1
+        },
+        {
+          "question": "What is the danger of overloaded electrical outlets?",
+          "options": ["Low energy bills", "Risk of fire", "Faster devices"],
+          "answer": 1
+        },
+        {
+          "question": "What should you do if you hear a tornado siren?",
+          "options": ["Check your phone", "Seek immediate shelter indoors", "Go for a drive"],
+          "answer": 1
+        },
+        {
+          "question": "Why should you check smoke alarm batteries regularly?",
+          "options": ["They make noise", "To ensure they work in a fire", "For fun"],
+          "answer": 1
+        },
+        {
+          "question": "What can happen if you use wet hands to plug in electronics?",
+          "options": ["Nothing", "Electric shock", "Faster charging"],
+          "answer": 1
+        },
+        {
+          "question": "How can you identify a heat exhaustion victim?",
+          "options": ["Cold skin", "Heavy sweating, weakness", "Blue lips"],
+          "answer": 1
+        },
+        {
+          "question": "Why are unsecured rugs dangerous in a home?",
+          "options": ["They get dirty", "They cause tripping hazards", "They don’t match decor"],
+          "answer": 1
+        },
+        {
+          "question": "Why is it risky to leave pets in hot cars?",
+          "options": ["They bark", "They can suffer heatstroke or die", "They need exercise"],
+          "answer": 1
+        },
+        {
+          "question": "What is one way to stay safe during a protest or public demonstration?",
+          "options": ["Get in the front line", "Be aware of exits and keep a safe distance", "Record everything"],
+          "answer": 1
+        },
+        {
+          "question": "What does the term 'boil water advisory' mean?",
+          "options": ["Drink more water", "Boil water before use due to contamination", "Stop drinking water"],
+          "answer": 1
+        },
+        {
+          "question": "Why is black mold considered a hazard?",
+          "options": ["Smells bad", "Can cause respiratory issues", "Attracts insects"],
+          "answer": 1
+        },
+        {
+          "question": "What should you avoid doing during a wildfire evacuation order?",
+          "options": ["Leave early", "Delay or ignore the order", "Take essentials"],
+          "answer": 1
+        },
+        {
+          "question": "Why is icy pavement dangerous?",
+          "options": ["It reflects sunlight", "It’s slippery and causes falls", "It’s pretty"],
+          "answer": 1
+        },
+        {
+          "question": "What should you always wear while biking in traffic?",
+          "options": ["Headphones", "Helmet and bright clothing", "Flip flops"],
+          "answer": 1
+        },
+        {
+          "question": "Why should sharp tools be stored properly?",
+          "options": ["They rust faster", "To prevent injury", "They’re expensive"],
+          "answer": 1
+        },
+        {
+          "question": "Why should chemicals not be mixed without knowledge?",
+          "options": ["To avoid making a mess", "It can cause dangerous reactions", "They might explode"],
+          "answer": 1
+        },
+        {
+          "question": "What is the purpose of a fire extinguisher?",
+          "options": ["Decoration", "Put out small fires", "To hold a door open"],
+          "answer": 1
+        },
+        {
+          "question": "How can you avoid carbon monoxide poisoning at home?",
+          "options": ["Use candles", "Install detectors and ventilate appliances", "Keep windows closed"],
+          "answer": 1
+        },
+        {
+          "question": "What is the safest way to cross a busy street?",
+          "options": ["Anywhere", "At crosswalks with signals", "In the middle"],
+          "answer": 1
+        },
+        {
+          "question": "How often should you replace emergency water supplies?",
+          "options": ["Every 10 years", "Every 6–12 months", "Never"],
+          "answer": 1
+        },
+        {
+          "question": "What does 'STOP' mean in safety procedures?",
+          "options": ["Start Thinking Of Pizza", "Stop, Think, Observe, Proceed", "Stand Tall Over People"],
+          "answer": 1
+        },
+        {
+          "question": "What is one key hazard in crowded events?",
+          "options": ["Loud music", "Stampedes or trampling", "Lights"],
+          "answer": 1
+        },
+        {
+          "question": "What does a hazard triangle with a skull symbol represent?",
+          "options": ["Poison", "Pirates", "Bad luck"],
+          "answer": 0
+        },
+        {
+          "question": "Why should you avoid using gas grills indoors?",
+          "options": ["Smoke", "Carbon monoxide and fire risk", "Smells funny"],
+          "answer": 1
+        },
+        {
+          "question": "What safety item should be in every car?",
+          "options": ["Bluetooth speaker", "First aid kit", "Mini fridge"],
+          "answer": 1
+        },
+        {
+          "question": "Why is it important to label cleaning chemicals?",
+          "options": ["So they look neat", "To avoid misuse and hazards", "To impress guests"],
+          "answer": 1
+        },
+        {
+          "question": "What is a safe behavior while walking at night?",
+          "options": ["Dark clothes", "Use reflective gear and stay in lit areas", "No phone"],
+          "answer": 1
+        },
+        {
+          "question": "Why should ladders never be placed on unstable surfaces?",
+          "options": ["They squeak", "They could fall and cause injury", "They move"],
+          "answer": 1
+        },
+        {
+          "question": "What should you do before starting any digging outdoors?",
+          "options": ["Dig fast", "Call utility locator services", "Guess where pipes are"],
+          "answer": 1
+        },
+        {
+          "question": "What should you do if you’re exposed to hazardous fumes?",
+          "options": ["Keep working", "Leave area and get fresh air", "Take a nap"],
+          "answer": 1
+        },
+        {
+          "question": "Why is it risky to leave broken glass on the floor?",
+          "options": ["It looks messy", "It can cause serious cuts", "It breaks more"],
+          "answer": 1
+        },
+        {
+          "question": "What is a safe way to carry sharp objects?",
+          "options": ["In a pocket", "Pointed down and away from the body", "With blade out"],
+          "answer": 1
+        },
+        {
+          "question": "What should you do if someone is electrocuted and still in contact with power?",
+          "options": ["Pull them with bare hands", "Turn off power first, then help", "Yell at them"],
+          "answer": 1
+        }
+]
+      
+  

@@ -4,38 +4,40 @@ from streamlit_folium import st_folium
 from datetime import datetime, timedelta
 from database.process_hazard import get_recent_hazards
 import matplotlib.pyplot as plt
+from backend.query_rag import get_response
+from quiz_data.quiz_loader import load_quiz_questions
+import random
+from component.quiz_ui import show_quiz_ui
+from services.quiz_generator import generate_quiz_batch
 
 def show_alert_map_ui():
     st.title("🌍 SafeIndy - Citywide Hazard Map")
 
-    # Global CSS: full-column background coloring with borders
+    # === Custom Styling ===
     st.markdown("""
         <style>
             div[data-testid="column"]:nth-of-type(1) {
-                background-color: #fff9f0;
+                background-color: #e6f7ff;
                 padding: 1.5rem;
                 border-radius: 12px;
-                border: 2px solid #e0e0e0;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             div[data-testid="column"]:nth-of-type(2) {
-                background-color: #f0f7ff;
+                background-color: #f0fff4;
                 padding: 1.5rem;
                 border-radius: 12px;
-                border: 2px solid #e0e0e0;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             .stButton > button {
-                background-color: #ffcccc;
-                color: black;
+                background-color: #ffa07a;
+                color: white;
                 font-weight: bold;
+                border: none;
                 border-radius: 6px;
                 padding: 0.5rem 1rem;
                 margin-top: 0.5rem;
                 margin-bottom: 1rem;
             }
-            .stMarkdown {
-                margin-bottom: 1rem;
+            .stSelectbox > div {
+                font-size: 0.95rem;
             }
         </style>
     """, unsafe_allow_html=True)
@@ -46,7 +48,7 @@ def show_alert_map_ui():
     with left_col:
         if st.button("⬅️ Return to ChatBot", key="return_btn"):
             st.session_state.show_map_mode = False
-            st.experimental_set_query_params()
+            st.rerun()
 
         st.subheader("🔎 Filter Alerts")
 
@@ -70,7 +72,6 @@ def show_alert_map_ui():
                 key="map_severity"
             )
 
-        # Filtering logic
         time_mapping = {
             "Past 1 hour": timedelta(hours=1),
             "Past 2 hours": timedelta(hours=2),
@@ -84,7 +85,6 @@ def show_alert_map_ui():
         if severity != "All":
             hazards = [h for h in hazards if h.get("severity") == severity]
 
-        # Folium map
         m = folium.Map(location=[39.7684, -86.1581], zoom_start=12)
         color_map = {
             "Low": "green",
@@ -101,11 +101,13 @@ def show_alert_map_ui():
                 icon=folium.Icon(color=color_map.get(h.get("severity"), "blue"))
             ).add_to(m)
 
-        st_folium(m, height=500, width="100%")
+        st_folium(m, height=500, width=None)
 
     # ==== RIGHT COLUMN ====
     with right_col:
         st.subheader("📊 Hazard Type Distribution")
+
+        chart_type = st.selectbox("📈 Choose Chart Type", ["Pie Chart", "Bar Graph"], key="chart_type")
 
         type_counts = {}
         for h in hazards:
@@ -114,8 +116,35 @@ def show_alert_map_ui():
 
         if type_counts:
             fig, ax = plt.subplots()
-            ax.pie(type_counts.values(), labels=type_counts.keys(), autopct='%1.1f%%', startangle=90)
-            ax.axis('equal')
+
+            if chart_type == "Pie Chart":
+                pastel_blues = ['#cce5ff', '#b3d7ff', '#99ccff', '#80bfff', '#66b3ff', '#4da6ff']
+                ax.pie(
+                    list(type_counts.values()),
+                    labels=list(type_counts.keys()),
+                    autopct='%1.1f%%',
+                    startangle=90,
+                    colors=pastel_blues[:len(type_counts)],
+                    textprops={'fontsize': 10}
+                )
+                ax.axis('equal')
+
+            elif chart_type == "Bar Graph":
+                ax.bar(
+                    list(type_counts.keys()),
+                    list(type_counts.values()),
+                    color='#80bfff'
+                )
+                ax.set_ylabel("Number of Hazards")
+                ax.set_xlabel("Hazard Type")
+                ax.set_title("Hazards by Type")
+                plt.xticks(rotation=45)
+
             st.pyplot(fig)
         else:
-            st.info("No hazards found for selected filters.")
+            st.info("✅ No hazards found for selected filters.")
+
+        st.markdown("---")
+        show_quiz_ui()
+
+
