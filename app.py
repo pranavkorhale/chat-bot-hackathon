@@ -2,7 +2,7 @@ import streamlit as st
 st.set_page_config(page_title="SafeIndy - Public Safety Chatbot", layout="wide")
 import os
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import folium
 from streamlit_folium import st_folium
 from backend.query_rag import get_response, get_llm
@@ -251,7 +251,7 @@ with right_col:
         "Past 24 hours": timedelta(hours=24)
     }
 
-    hazards = get_recent_hazards(since=datetime.utcnow() - time_mapping[time_range])
+    hazards = get_recent_hazards(since=datetime.now(timezone.utc) - time_mapping[time_range])
     if hazard_type_filter != "All":
         hazards = [h for h in hazards if h.get("hazard_type") == hazard_type_filter]
     if severity_filter != "All":

@@ -1,7 +1,7 @@
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta,timezone
 from database.process_hazard import get_recent_hazards
 import matplotlib.pyplot as plt
 from backend.query_rag import get_response
@@ -79,7 +79,7 @@ def show_alert_map_ui():
             "Past 24 hours": timedelta(hours=24)
         }
 
-        hazards = get_recent_hazards(since=datetime.utcnow() - time_mapping[time_range])
+        hazards = get_recent_hazards(since=datetime.now(timezone.utc) - time_mapping[time_range])
         if hazard_type != "All":
             hazards = [h for h in hazards if h.get("hazard_type") == hazard_type]
         if severity != "All":

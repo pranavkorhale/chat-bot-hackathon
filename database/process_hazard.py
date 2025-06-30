@@ -1,5 +1,5 @@
 from supabase import create_client, Client
-from datetime import datetime
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 import os
 
@@ -17,7 +17,7 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 # === Save a Hazard to Supabase ===
 def save_hazard_if_needed(hazard_data: dict) -> bool:
     try:
-        hazard_data["timestamp"] = datetime.utcnow().isoformat()
+        hazard_data["timestamp"] = datetime.now(timezone.utc).isoformat()
         hazard_data["source"] = hazard_data.get("source", "user")
         response = supabase.table("hazards").insert(hazard_data).execute()
         return bool(response.data)
