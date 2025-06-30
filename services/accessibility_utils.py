@@ -48,3 +48,27 @@ def speak_text(text):
         
     except Exception as e:
         print(f"Speech synthesis failed: {str(e)}")
+
+
+
+def record_and_transcribe():
+    """Record audio from microphone and transcribe using Google Speech Recognition"""
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        st.write("Listening... (5 second timeout)")
+        recognizer.adjust_for_ambient_noise(source)
+        try:
+            audio = recognizer.listen(source, timeout=5)
+            text = recognizer.recognize_google(audio)
+            return text
+        except sr.WaitTimeoutError:
+            print("Listening timed out")
+            return None
+        except sr.UnknownValueError:
+            print("Could not understand audio")
+            return None
+        except Exception as e:
+            print(f"Voice recognition failed: {str(e)}")
+            return None
+
+
