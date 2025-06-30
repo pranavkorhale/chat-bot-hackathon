@@ -12,30 +12,33 @@ try:
     from pygame import mixer
     mixer.init()
     AUDIO_AVAILABLE = True
-except Exception as e:
-    print(f"Audio not available: {e}")
+except Exception:
+    # Avoid printing noisy logs in Streamlit UI
+    AUDIO_AVAILABLE = False
 
 def speak_text(text):
-    """Convert text to speech and play it using pygame mixer"""
+    """Convert text to speech and play it using pygame mixer (if available)."""
     if not AUDIO_AVAILABLE:
-        print(f"[AUDIO DISABLED] Would have spoken: {text}")
+        # Optionally log to a file or suppress
         return
 
     try:
         if not text or not isinstance(text, str):
             return
-            
+
+        # Save the speech to a temporary mp3 file
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as fp:
-            tts = gTTS(text=text, lang='en')
-            tts.save(fp.name)
+            gTTS(text=text, lang='en').save(fp.name)
             temp_file = fp.name
 
+        # Wait if audio is already playing
         while mixer.music.get_busy():
             time.sleep(0.1)
-        
+
         mixer.music.load(temp_file)
         mixer.music.play()
 
+        # Clean up the file after playback finishes
         def cleanup():
             while mixer.music.get_busy():
                 time.sleep(0.1)
@@ -43,32 +46,26 @@ def speak_text(text):
                 os.remove(temp_file)
             except:
                 pass
-                
-        threading.Thread(target=cleanup, daemon=True).start()
-        
-    except Exception as e:
-        print(f"Speech synthesis failed: {str(e)}")
 
+        threading.Thread(target=cleanup, daemon=True).start()
+
+    except Exception as e:
+        # Optionally log error silently
+        pass
 
 
 def record_and_transcribe():
-    """Record audio from microphone and transcribe using Google Speech Recognition"""
+    """Record audio from mic and transcribe using Google Speech Recognition."""
     recognizer = sr.Recognizer()
-    with sr.Microphone() as source:
-        st.write("Listening... (5 second timeout)")
-        recognizer.adjust_for_ambient_noise(source)
-        try:
+    try:
+        with sr.Microphone() as source:
+            st.write("🎙️ Listening... (timeout in 5 sec)")
+            recognizer.adjust_for_ambient_noise(source)
             audio = recognizer.listen(source, timeout=5)
-            text = recognizer.recognize_google(audio)
-            return text
-        except sr.WaitTimeoutError:
-            print("Listening timed out")
-            return None
-        except sr.UnknownValueError:
-            print("Could not understand audio")
-            return None
-        except Exception as e:
-            print(f"Voice recognition failed: {str(e)}")
-            return None
-
-
+            return recognizer.recognize_google(audio)
+    except sr.WaitTimeoutError:
+        return None
+    except sr.UnknownValueError:
+        return None
+    except Exception:
+        return None
