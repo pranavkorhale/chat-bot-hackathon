@@ -4,8 +4,7 @@ SafeIndy - Public Safety Chatbot
 Installation & Run
 ------------------
 
-1. Clone the repository
-   git clone https://github.com/yourusername/safeindy.git
+1. Clone the repository and then 
    cd safeindy
 
 2. Install dependencies
