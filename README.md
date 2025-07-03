@@ -6,7 +6,8 @@ Installation & Run
 
 1. **Clone the repository**
    
-   git clone --branch blind-mode-integration --single-branch https://github.com/pranavkorhale/chat-bot-hackathon.git 
+   git clone --branch blind-mode-integration --single-branch https://github.com/pranavkorhale/chat-bot-hackathon.git
+   
    cd safeindy
 
 3. **Install dependencies**
